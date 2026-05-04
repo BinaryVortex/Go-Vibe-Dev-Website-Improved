@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo.png" alt="go-vibe Logo" width="400"/>
+  <img src="logo.png" alt="go-vibe Logo" width="1000"/>
   
   # go-vibe
   
