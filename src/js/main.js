@@ -23,12 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('darkMode', isDarkMode);
             updateDarkModeIcon(isDarkMode);
             
-            // Re-initialize Mermaid diagrams with new theme
+            // Re-initialize Mermaid diagrams with light theme (always 'default')
             if (typeof mermaid !== 'undefined') {
-                const newTheme = isDarkMode ? 'dark' : 'default';
                 mermaid.initialize({
                     startOnLoad: true,
-                    theme: newTheme,
+                    theme: 'default',
                     securityLevel: 'loose',
                     flowchart: {
                         curve: 'basis',
