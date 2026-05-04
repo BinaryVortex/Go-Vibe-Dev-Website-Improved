@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hero.insertBefore(particlesContainer, hero.firstChild);
         
         // Create particles spread across the entire hero section
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 10; i++) {
             const particle = document.createElement('div');
             particle.className = 'code-particle';
             particle.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
@@ -358,7 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
             particle.style.left = `${left}%`;
             particle.style.top = `${top}%`;
             particle.style.transform = 'rotate(' + (Math.random() * 360 - 180) + 'deg)';
-            particle.style.animation = `fadeIn ${Math.random() * 3 + 2}s ease-out ${Math.random() * 4}s forwards`;
             
             particlesContainer.appendChild(particle);
         }
