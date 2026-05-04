@@ -328,22 +328,37 @@ document.addEventListener('DOMContentLoaded', () => {
         particlesContainer.style.zIndex = '1';
         hero.insertBefore(particlesContainer, hero.firstChild);
         
-        // Create particles
-        for (let i = 0; i < 15; i++) {
+        // Create particles spread across the entire hero section
+        for (let i = 0; i < 25; i++) {
             const particle = document.createElement('div');
             particle.className = 'code-particle';
             particle.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
             
-            // Random styling
+            // Random styling with better distribution
             particle.style.position = 'absolute';
-            particle.style.color = `rgba(79, 70, 229, ${Math.random() * 0.2 + 0.1})`;
-            particle.style.fontSize = `${Math.random() * 0.8 + 0.6}rem`;
+            particle.style.opacity = `${Math.random() * 0.4 + 0.3}`;
+            particle.style.fontSize = `${Math.random() * 0.8 + 0.5}rem`;
             particle.style.fontFamily = 'monospace';
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            particle.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg)';
-            particle.style.opacity = '80';
-            particle.style.animation = `fadeIn ${Math.random() * 2 + 2}s ease-out ${Math.random() * 3}s forwards`;
+            
+            // Position particles while keeping clear zone around center content
+            let left, top;
+            let validPosition = false;
+            
+            // Keep trying to find a position that's away from center content area
+            while (!validPosition) {
+                left = Math.random() * 100;
+                top = Math.random() * 100;
+                
+                // Exclude center area (30% to 70% horizontally, 20% to 80% vertically)
+                if (left < 25 || left > 75 || top < 15 || top > 85) {
+                    validPosition = true;
+                }
+            }
+            
+            particle.style.left = `${left}%`;
+            particle.style.top = `${top}%`;
+            particle.style.transform = 'rotate(' + (Math.random() * 360 - 180) + 'deg)';
+            particle.style.animation = `fadeIn ${Math.random() * 3 + 2}s ease-out ${Math.random() * 4}s forwards`;
             
             particlesContainer.appendChild(particle);
         }
