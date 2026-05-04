@@ -1,3 +1,7 @@
+<div align="center">
+<img src="logo.png" alt="FUTURA Logo" width="1000"/>
+</div>
+
 # go-vibe.dev
 
 The go-vibe process is an iterative approach to software development that leverages AI-powered coding IDEs (like Cursor) to accelerate development.
