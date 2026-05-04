@@ -35,6 +35,24 @@ html, body {
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     --transition-base: all 0.2s ease-in-out;
+    
+    /* Light mode colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --border-color: #e2e8f0;
+    --header-bg: #ffffff;
+}
+
+/* Dark mode colors */
+html.dark-mode {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --border-color: #334155;
+    --header-bg: #1e293b;
 }
 
 /* Mobile-first media queries */
@@ -179,10 +197,11 @@ html, body {
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     line-height: 1.6;
-    color: var(--gray-800);
-    background-color: var(--gray-50);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
     width: 100%;
     position: relative;
+    transition: var(--transition-base);
 }
 
 .container {
@@ -194,18 +213,20 @@ body {
 
 /* Header and Navigation */
 header {
-    background-color: #fff;
+    background-color: var(--header-bg);
     box-shadow: var(--shadow-sm);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: var(--transition-base);
 }
 
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 1rem 0;
+    gap: 3rem;
 }
 
 .logo {
@@ -219,7 +240,7 @@ nav {
     font-weight: 600;
     display: flex;
     align-items: center;
-    color: var(--gray-900);
+    color: var(--text-primary);
     letter-spacing: -0.025em;
 }
 
@@ -232,7 +253,7 @@ nav {
 
 .by-99x span {
     font-size: 0.8rem;
-    color: var(--gray-700);
+    color: var(--text-secondary);
     margin-right: 5px;
 }
 
@@ -259,7 +280,7 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--gray-700);
+    color: var(--text-secondary);
     font-weight: 500;
     transition: var(--transition-base);
     font-size: 0.95rem;
@@ -272,10 +293,35 @@ nav {
     background-color: rgba(99, 102, 241, 0.05);
 }
 
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    padding: 0.5rem;
+    margin-left: 1rem;
+    transition: var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+    color: var(--primary-color);
+}
+
+.dark-mode-toggle i {
+    transition: var(--transition-base);
+}
+
 /* Hero Section */
 .hero {
     padding: 6rem 0 2rem;
-    background-color: #fff;
+    background-color: var(--bg-primary);
     background-image: 
         radial-gradient(#6366f130 1px, transparent 1px),
         linear-gradient(to right, #6366f120 1px, transparent 1px),
@@ -283,6 +329,7 @@ nav {
     background-size: 20px 20px, 40px 40px, 40px 40px;
     position: relative;
     overflow: hidden;
+    transition: var(--transition-base);
 }
 
 .hero::before {
@@ -353,13 +400,13 @@ nav {
     margin-bottom: 1rem;
     letter-spacing: -0.025em;
     line-height: 1.2;
-    color: var(--gray-900);
+    color: var(--text-primary);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .hero p {
     font-size: 1.5rem;
-    color: var(--gray-800);
+    color: var(--text-secondary);
     margin-bottom: 2rem;
     max-width: 600px;
     line-height: 1.6;
@@ -369,10 +416,14 @@ nav {
 }
 
 .hero .ai-accent {
-    color: var(--primary-color);
+    color: #8b5cf6;
     font-weight: 600;
     position: relative;
     display: inline-block;
+}
+
+html.dark-mode .hero .ai-accent {
+    color: #a78bfa;
 }
 
 .hero .ai-accent::after {
@@ -486,7 +537,7 @@ nav {
     font-size: 1.25rem;
     line-height: 1.7;
     margin-bottom: 0;
-    color: var(--gray-800);
+    color: var(--text-secondary);
     position: relative;
     padding-left: 1rem;
 }
@@ -512,8 +563,9 @@ nav {
 /* Why Methodology Section */
 .why-methodology {
     padding: 6rem 0 5rem;
-    background-color: var(--gray-100);
+    background-color: var(--bg-secondary);
     position: relative;
+    transition: var(--transition-base);
 }
 
 .why-methodology::before {
@@ -523,7 +575,7 @@ nav {
     left: 0;
     right: 0;
     height: 100px;
-    background: linear-gradient(to bottom, transparent, var(--gray-100));
+    background: linear-gradient(to bottom, transparent, var(--bg-secondary));
     z-index: 1;
 }
 
@@ -542,6 +594,7 @@ nav {
     padding: 0;
     height: auto;
     overflow: visible;
+    color: var(--text-primary);
 }
 
 .why-methodology p {
@@ -549,7 +602,7 @@ nav {
     margin: 0 auto 4rem;
     text-align: center;
     font-size: 1.125rem;
-    color: var(--gray-700);
+    color: var(--text-secondary);
 }
 
 .benefits-challenges {
@@ -560,7 +613,7 @@ nav {
 }
 
 .challenge-card {
-    background-color: white;
+    background-color: var(--bg-primary);
     padding: 2rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
@@ -606,9 +659,9 @@ nav {
     gap: 1rem;
     padding: 1rem;
     border-radius: var(--radius-md);
-    background-color: var(--gray-50);
+    background-color: var(--bg-secondary);
     transition: var(--transition-base);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--border-color);
 }
 
 .feature-list li:hover {
@@ -629,12 +682,12 @@ nav {
 .feature-list li span {
     font-size: 1.1rem;
     line-height: 1.5;
-    color: var(--gray-800);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
 .need-box {
-    background-color: white;
+    background-color: var(--bg-primary);
     padding: 2.5rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
@@ -670,7 +723,7 @@ nav {
 }
 
 .check-list li:hover {
-    background-color: var(--gray-50);
+    background-color: var(--bg-secondary);
 }
 
 .check-list li i {
@@ -685,7 +738,8 @@ nav {
 /* Methodology Section */
 .methodology {
     padding: 5rem 0;
-    background-color: white;
+    background-color: var(--bg-primary);
+    transition: var(--transition-base);
 }
 
 .methodology h2 {
@@ -698,6 +752,7 @@ nav {
     padding: 0;
     height: auto;
     overflow: visible;
+    color: var(--text-primary);
 }
 
 .methodology p {
@@ -705,7 +760,7 @@ nav {
     margin: 0 auto 3rem;
     text-align: center;
     font-size: 1.125rem;
-    color: var(--gray-700);
+    color: var(--text-secondary);
 }
 
 .feature-cards {
@@ -719,7 +774,7 @@ nav {
     text-align: center;
     max-width: 280px;
     padding: 2rem;
-    background-color: var(--gray-100);
+    background-color: var(--bg-secondary);
     border-radius: var(--radius-lg);
     transition: transform 0.2s;
 }
@@ -745,8 +800,9 @@ nav {
 
 /* Principles Section */
 .principles {
-    background-color: var(--gray-100);
+    background-color: var(--bg-secondary);
     padding: 0.5rem 0;
+    transition: var(--transition-base);
 }
 
 .principles h2 {
@@ -759,6 +815,7 @@ nav {
     padding: 0;
     height: auto;
     overflow: visible;
+    color: var(--text-primary);
 }
 
 .principles p {
@@ -766,7 +823,7 @@ nav {
     margin: 1rem auto 1rem;
     text-align: left;
     font-size: 1.125rem;
-    color: var(--gray-700);
+    color: var(--text-secondary);
 }
 
 .principles-list {
@@ -780,7 +837,7 @@ nav {
     align-items: flex-start;
     gap: 1.5rem;
     padding: 1.5rem;
-    background-color: white;
+    background-color: var(--bg-primary);
     border-radius: var(--radius-lg);
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow-md);
@@ -804,20 +861,21 @@ nav {
 .principles-list li h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--gray-900);
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .principles-list li p {
-    color: var(--gray-700);
+    color: var(--text-secondary);
     line-height: 1.6;
 }
 
 .process-flow {
-    background-color: white;
+    background-color: var(--bg-primary);
     padding: 2.5rem;
     border-radius: var(--radius-lg);
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    transition: var(--transition-base);
 }
 
 .process-flow h3 {
@@ -825,18 +883,19 @@ nav {
     margin-bottom: 2rem;
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--gray-800);
+    color: var(--text-primary);
 }
 
 .process-diagram {
     margin: 2rem 0;
     padding: 2rem;
-    background-color: var(--gray-50);
+    background-color: var(--bg-secondary);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: var(--transition-base);
 }
 
 .process-diagram .mermaid {
@@ -854,19 +913,20 @@ nav {
     font-family: 'Fira Code', monospace;
     font-size: 0.9rem;
     line-height: 1.5;
-    color: var(--gray-800);
+    color: var(--text-primary);
     white-space: pre-wrap;
     overflow-x: auto;
     padding: 1rem;
-    background-color: white;
+    background-color: var(--bg-primary);
     border-radius: var(--radius-md);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--border-color);
+    transition: var(--transition-base);
 }
 
 .markdown-viewer code {
     display: block;
     padding: 1rem;
-    background-color: var(--gray-100);
+    background-color: var(--bg-secondary);
     border-radius: var(--radius-sm);
     font-family: 'Fira Code', monospace;
     font-size: 0.85rem;
@@ -881,10 +941,11 @@ nav {
 }
 
 .flow-step {
-    background-color: var(--gray-100);
+    background-color: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: var(--radius-md);
     position: relative;
+    transition: var(--transition-base);
 }
 
 .flow-step h4 {
@@ -913,8 +974,8 @@ nav {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #4f46e5;
-    background-color: rgba(79, 70, 229, 0.08);
+    color: var(--primary-color);
+    background-color: rgba(99, 102, 241, 0.15);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.875rem;
@@ -922,14 +983,14 @@ nav {
     border-radius: 0.375rem;
     margin-top: 0.5rem;
     transition: all 0.2s ease;
-    border: 1px solid rgba(79, 70, 229, 0.2);
+    border: 1px solid var(--primary-color);
 }
 
 .show-how-link:hover {
     color: #fff;
-    background-color: #4f46e5;
+    background-color: var(--primary-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3);
 }
 
 .show-how-link i {
@@ -959,6 +1020,11 @@ nav {
     padding: 5rem 0;
     position: relative;
     overflow: hidden;
+    transition: var(--transition-base);
+}
+
+html.dark-mode .paradigm-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
 
 .paradigm-banner::before {
@@ -983,9 +1049,7 @@ nav {
     margin-bottom: 2rem;
     letter-spacing: -0.025em;
     line-height: 1.2;
-    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.9) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: white;
     text-align: center;
 }
 
@@ -1006,7 +1070,8 @@ nav {
 /* Resources Section */
 .resources {
     padding: 5rem 0;
-    background-color: white;
+    background-color: var(--bg-primary);
+    transition: var(--transition-base);
 }
 
 .resources h2 {
@@ -1019,6 +1084,7 @@ nav {
     padding: 0;
     height: auto;
     overflow: visible;
+    color: var(--text-primary);
 }
 
 .resources-content {
@@ -1030,7 +1096,7 @@ nav {
 .resources-content p {
     margin-bottom: 3rem;
     font-size: 1.125rem;
-    color: var(--gray-700);
+    color: var(--text-secondary);
 }
 
 .contribution-grid {
@@ -1041,12 +1107,12 @@ nav {
 }
 
 .contribution-card {
-    background-color: var(--gray-100);
+    background-color: var(--bg-secondary);
     padding: 2rem;
     border-radius: var(--radius-lg);
     text-align: left;
     transition: var(--transition-base);
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--border-color);
 }
 
 .contribution-card:hover {
@@ -1068,12 +1134,12 @@ nav {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--gray-900);
+    color: var(--text-primary);
 }
 
 .contribution-card p {
     font-size: 1rem;
-    color: var(--gray-700);
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
     text-align: left;
 }
@@ -1101,32 +1167,33 @@ nav {
 }
 
 .community-cta {
-    background-color: var(--gray-100);
+    background-color: var(--bg-secondary);
     padding: 2.5rem;
     border-radius: var(--radius-lg);
     text-align: center;
     margin-top: 3rem;
     border: 2px dashed var(--primary-color);
+    transition: var(--transition-base);
 }
 
 .community-cta h3 {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: var(--gray-900);
+    color: var(--text-primary);
 }
 
 .community-cta p {
     margin-bottom: 1.5rem;
-    color: var(--gray-700);
+    color: var(--text-secondary);
 }
 
 .github-button {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    background-color: var(--gray-900);
-    color: white;
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
     text-decoration: none;
     padding: 0.75rem 1.5rem;
     border-radius: var(--radius-md);
@@ -1135,7 +1202,7 @@ nav {
 }
 
 .github-button:hover {
-    background-color: var(--gray-800);
+    background-color: var(--text-secondary);
     transform: translateY(-1px);
 }
 
@@ -1148,6 +1215,11 @@ footer {
     background-color: var(--gray-900);
     color: white;
     padding: 4rem 0 2rem;
+    transition: var(--transition-base);
+}
+
+html.dark-mode footer {
+    background-color: #0f172a;
 }
 
 footer .container {

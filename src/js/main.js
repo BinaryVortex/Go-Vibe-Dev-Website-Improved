@@ -2,6 +2,70 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Go Vibe website loaded successfully!');
     
+    // Dark Mode Setup
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    // Check if user has a saved dark mode preference
+    const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true' && 
+                             (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    // Initialize dark mode based on user preference (defaults to light mode)
+    if (isDarkModeEnabled) {
+        document.documentElement.classList.add('dark-mode');
+        updateDarkModeIcon(true);
+    }
+    
+    // Add dark mode toggle listener
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark-mode');
+            const isDarkMode = document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            updateDarkModeIcon(isDarkMode);
+            
+            // Re-initialize Mermaid diagrams with new theme
+            if (typeof mermaid !== 'undefined') {
+                const newTheme = isDarkMode ? 'dark' : 'default';
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: newTheme,
+                    securityLevel: 'loose',
+                    flowchart: {
+                        curve: 'basis',
+                        padding: 20,
+                        htmlLabels: true
+                    }
+                });
+                
+                // Clear and re-render Mermaid diagrams
+                const mermaidElements = document.querySelectorAll('.mermaid svg');
+                mermaidElements.forEach(svg => {
+                    if (svg.parentElement) {
+                        svg.parentElement.innerHTML = svg.parentElement.querySelector('.mermaid').textContent || '';
+                    }
+                });
+                
+                setTimeout(() => {
+                    mermaid.contentLoaded();
+                }, 100);
+            }
+        });
+    }
+    
+    // Update icon based on dark mode state
+    function updateDarkModeIcon(isDarkMode) {
+        if (darkModeToggle) {
+            const icon = darkModeToggle.querySelector('i');
+            if (isDarkMode) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    }
+    
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('.nav-links a');
     
