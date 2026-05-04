@@ -31,6 +31,9 @@
                     <li><a href="#principles">Principles</a></li>
                     <li><a href="#resources">Resources</a></li>
                 </ul>
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
             </nav>
         </div>
     </header>
@@ -156,8 +159,8 @@
                             
                                 style D fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#fff
                                 style C fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#fff
-                                style Docs_in_Markdown fill:#f1f5f9,stroke:#334155,stroke-width:1px
-                                style Code_Section fill:#f1f5f9,stroke:#334155,stroke-width:1px
+                                style Docs_in_Markdown fill:#e2e8f0,stroke:#334155,stroke-width:1px,color:#1e293b
+                                style Code_Section fill:#e2e8f0,stroke:#334155,stroke-width:1px,color:#1e293b
                                 linkStyle 0,1 stroke:#6366f1,stroke-width:2px
                             
                         </div>
@@ -236,17 +239,31 @@
     </footer>
 
     <script>
-        // Initialize Mermaid
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default',
-            securityLevel: 'loose',
-            flowchart: {
-                curve: 'basis',
-                padding: 20,
-                htmlLabels: true
-            }
-        });
+        // Initialize Mermaid with dark mode support
+        function initializeMermaid() {
+            const isDarkMode = document.documentElement.classList.contains('dark-mode');
+            const theme = isDarkMode ? 'dark' : 'default';
+            
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: theme,
+                securityLevel: 'loose',
+                flowchart: {
+                    curve: 'basis',
+                    padding: 20,
+                    htmlLabels: true
+                }
+            });
+            
+            mermaid.contentLoaded();
+        }
+        
+        // Initialize on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeMermaid);
+        } else {
+            initializeMermaid();
+        }
     </script>
     <script src="src/js/main.js"></script>
 </body>
