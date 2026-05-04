@@ -136,7 +136,7 @@
                                     'lineColor': '#4f46e5',
                                     'secondaryColor': '#e2e8f0',
                                     'tertiaryColor': '#cbd5e1',
-                                    'edgeLabelBackground': '#cbd5e1',
+                                    'edgeLabelBackground': '#ffffff',
                                     'labelTextColor': '#1e293b'
                                 }
                             }}%%
@@ -239,14 +239,11 @@
     </footer>
 
     <script>
-        // Initialize Mermaid with dark mode support
+        // Initialize Mermaid with light mode theme only
         function initializeMermaid() {
-            const isDarkMode = document.documentElement.classList.contains('dark-mode');
-            const theme = isDarkMode ? 'dark' : 'default';
-            
             mermaid.initialize({
                 startOnLoad: true,
-                theme: theme,
+                theme: 'default',
                 securityLevel: 'loose',
                 flowchart: {
                     curve: 'basis',
